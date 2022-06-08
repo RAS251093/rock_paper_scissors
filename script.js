@@ -33,14 +33,14 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-function game() {
+function game(playerInput) {
     let numberOfRounds = 5;
     let total = 0;
     for (let i = 0; i < numberOfRounds; i++) {
-        if (playRound(playerSelection, computerPlay()) === "win") {
+        if (playRound(playerInput, computerPlay()) === "win") {
             total += 1;
             console.log("You win a round.")
-        } else if (playRound(playerSelection, computerPlay()) === "lose") {
+        } else if (playRound(playerInput, computerPlay()) === "lose") {
             total -= 1;
             console.log("You lose a round.")
         } else {
@@ -59,8 +59,14 @@ function game() {
 }
 
 
-const playerSelection = "rock";
+const playerSelection = prompt("Choose your weapon!!!", "Rock, paper or scissors???");
+playerSelectionTest(playerSelection.toLowerCase());
 
-    
-console.log(game());
+function playerSelectionTest(playerInput) {
+    if (!(playerInput === "rock" || playerInput === "paper" || playerInput === "scissors")) {
+        console.log("You didn't enter a valid choice");
+    } else {
+        console.log(game(playerInput));
+    }
+}
 
