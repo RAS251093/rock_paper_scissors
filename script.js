@@ -61,14 +61,27 @@ function gameWinTest(roundTotal, numberOfRounds) {
     }
 }
 
-const playerSelection = prompt("Choose your weapon!!!", "Rock, paper or scissors???");
-playerSelectionTest(playerSelection.toLowerCase());
+let playerSelection = prompt("Choose your weapon!!!", "Rock, paper or scissors???");
+playerSelectionTest(playerSelection);
 
 function playerSelectionTest(playerInput) {
-    if (!(playerInput === "rock" || playerInput === "paper" || playerInput === "scissors")) {
-        console.log("You didn't enter a valid choice");
+    if (playerInput === null) {
+        return console.log("Game canceled");
+    } else if (!(playerInput === "rock" || playerInput === "paper" || playerInput === "scissors")) {
+        return playerSelection = prompt("You didn't enter a valid choice", "Try again");
     } else {
         console.log(game(playerInput));
     }
+
+
+    /*
+    if (!(playerInput === "rock" || playerInput === "paper" || playerInput === "scissors")) {
+        return playerSelection = prompt("You didn't enter a valid choice", "Try again");
+    } else if (playerInput === null) {
+        return console.log("Game canceled");
+    } else {
+        console.log(game(playerInput));
+    } 
+    */
 }
 
