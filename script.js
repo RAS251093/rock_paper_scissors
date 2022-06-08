@@ -34,23 +34,27 @@ function playRound (playerSelection, computerSelection) {
 }
 
 function game() {
+    let numberOfRounds = 5;
     let total = 0;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < numberOfRounds; i++) {
         if (playRound(playerSelection, computerPlay()) === "win") {
             total += 1;
+            console.log("You win a round.")
         } else if (playRound(playerSelection, computerPlay()) === "lose") {
             total -= 1;
+            console.log("You lose a round.")
         } else {
             total += 0;
+            console.log("You draw a round.")
         }
     }
-    console.log(total);
+    
     if (total > 0) {
-        return "You got the most wins over 5 rounds, you win!!";
+        return `You got the most wins over ${numberOfRounds} rounds, you win!!`;
     } else if (total < 0) {
-        return "You got the most losses over 5 rounds, you lose...";
+        return `You got the most losses over ${numberOfRounds} rounds, you lose...`;
     } else {
-        return "Over the 5 rounds played, it was a draw!";
+        return `Over the ${numberOfRounds} rounds played, it was a draw!`;
     }
 }
 
