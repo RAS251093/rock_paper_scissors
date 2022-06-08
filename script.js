@@ -12,9 +12,9 @@ function computerPlay () {
 
 function playRound (playerSelection, computerSelection) {
 
-    let winTest = (playerSelection + computerSelection).toLowerCase();
+    let roundWinTest = (playerSelection + computerSelection).toLowerCase();
 
-    switch(winTest) {
+    switch(roundWinTest) {
         case "rockrock":
         case "paperpaper":
         case "scissorsscissors":
@@ -48,16 +48,18 @@ function game(playerInput) {
             console.log("You draw a round.")
         }
     }
-    
-    if (total > 0) {
+    return gameWinTest(total, numberOfRounds);
+}
+
+function gameWinTest(roundTotal, numberOfRounds) {
+    if (roundTotal > 0) {
         return `You got the most wins over ${numberOfRounds} rounds, you win!!`;
-    } else if (total < 0) {
+    } else if (roundTotal < 0) {
         return `You got the most losses over ${numberOfRounds} rounds, you lose...`;
     } else {
         return `Over the ${numberOfRounds} rounds played, it was a draw!`;
     }
 }
-
 
 const playerSelection = prompt("Choose your weapon!!!", "Rock, paper or scissors???");
 playerSelectionTest(playerSelection.toLowerCase());
