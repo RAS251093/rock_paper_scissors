@@ -72,16 +72,5 @@ function playerSelectionTest(playerInput) {
     } else {
         console.log(game(playerInput));
     }
-
-
-    /*
-    if (!(playerInput === "rock" || playerInput === "paper" || playerInput === "scissors")) {
-        return playerSelection = prompt("You didn't enter a valid choice", "Try again");
-    } else if (playerInput === null) {
-        return console.log("Game canceled");
-    } else {
-        console.log(game(playerInput));
-    } 
-    */
 }
 
