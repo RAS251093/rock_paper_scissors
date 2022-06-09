@@ -11,7 +11,6 @@ function computerPlay () {
 }
 
 function playRound (playerSelection, computerSelection) {
-
     let roundWinTest = (playerSelection + computerSelection).toLowerCase();
 
     switch(roundWinTest) {
@@ -32,15 +31,22 @@ function playRound (playerSelection, computerSelection) {
             break;
     }
 }
+// start game
+// take a player input for each round
+// check player input for legality with playerSelectionTest()
+// if legal, call playRound() with playerInput & computerPlay()!
 
-function game(playerInput) {
+function game() {
     let numberOfRounds = 5;
     let total = 0;
+
     for (let i = 0; i < numberOfRounds; i++) {
-        if (playRound(playerInput, computerPlay()) === "win") {
+        let playerSelection = prompt("Choose your weapon!!!", "Rock, paper or scissors???");
+
+        if (playRound(playerSelection, computerPlay()) === "win") {
             total += 1;
             console.log("You win a round.")
-        } else if (playRound(playerInput, computerPlay()) === "lose") {
+        } else if (playRound(playerSelection, computerPlay()) === "lose") {
             total -= 1;
             console.log("You lose a round.")
         } else {
@@ -60,10 +66,7 @@ function gameWinTest(roundTotal, numberOfRounds) {
         return `Over the ${numberOfRounds} rounds played, it was a draw!`;
     }
 }
-
-let playerSelection = prompt("Choose your weapon!!!", "Rock, paper or scissors???");
-playerSelectionTest(playerSelection);
-
+/*
 function playerSelectionTest(playerInput) {
     if (playerInput === null) {
         return console.log("Game canceled");
@@ -72,5 +75,8 @@ function playerSelectionTest(playerInput) {
     } else {
         console.log(game(playerInput));
     }
-}
+} */
 
+
+console.log(game());
+// playerSelectionTest(playerSelection);
