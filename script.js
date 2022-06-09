@@ -31,22 +31,20 @@ function playRound (playerSelection, computerSelection) {
             break;
     }
 }
-// start game
-// take a player input for each round
-// check player input for legality with playerSelectionTest()
-// if legal, call playRound() with playerInput & computerPlay()!
 
 function game() {
-    let numberOfRounds = 5;
+    const numberOfRounds = 5;
     let total = 0;
 
     for (let i = 0; i < numberOfRounds; i++) {
-        let playerSelection = prompt("Choose your weapon!!!", "Rock, paper or scissors???");
+        let playerInput = prompt("Choose your weapon!!!", "Rock, paper or scissors???");
 
-        if (playRound(playerSelection, computerPlay()) === "win") {
+        playerSelectionTest(playerInput);
+
+        if (playRound(playerInput, computerPlay()) === "win") {
             total += 1;
             console.log("You win a round.")
-        } else if (playRound(playerSelection, computerPlay()) === "lose") {
+        } else if (playRound(playerInput, computerPlay()) === "lose") {
             total -= 1;
             console.log("You lose a round.")
         } else {
@@ -66,17 +64,17 @@ function gameWinTest(roundTotal, numberOfRounds) {
         return `Over the ${numberOfRounds} rounds played, it was a draw!`;
     }
 }
-/*
+
+
 function playerSelectionTest(playerInput) {
-    if (playerInput === null) {
+    if (playerInput === null || playerInput === undefined) {
         return console.log("Game canceled");
     } else if (!(playerInput === "rock" || playerInput === "paper" || playerInput === "scissors")) {
-        return playerSelection = prompt("You didn't enter a valid choice", "Try again");
+        return playerInput = prompt("You didn't enter a valid choice", "Try again");
     } else {
-        console.log(game(playerInput));
+        return playerInput;
     }
-} */
+}
 
 
 console.log(game());
-// playerSelectionTest(playerSelection);
