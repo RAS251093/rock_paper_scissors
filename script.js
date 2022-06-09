@@ -82,7 +82,6 @@ function playerSelectionTest(playerInput) {
 }
 
 function cancelGame() {
-    console.log("Game canceled")
     return null;
 }
 
