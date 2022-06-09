@@ -41,7 +41,10 @@ function game() {
 
         playerSelectionTest(playerInput);
 
-        if (playRound(playerInput, computerPlay()) === "win") {
+        if (playerInput === null || playerInput === "") {
+            total = null;
+            break;
+        } else if (playRound(playerInput, computerPlay()) === "win") {
             total += 1;
             console.log("You win a round.")
         } else if (playRound(playerInput, computerPlay()) === "lose") {
@@ -56,7 +59,9 @@ function game() {
 }
 
 function gameWinTest(roundTotal, numberOfRounds) {
-    if (roundTotal > 0) {
+    if (roundTotal === null) {
+        return "Nobody wins when you cancel."
+    } else if (roundTotal > 0) {
         return `You got the most wins over ${numberOfRounds} rounds, you win!!`;
     } else if (roundTotal < 0) {
         return `You got the most losses over ${numberOfRounds} rounds, you lose...`;
@@ -67,7 +72,7 @@ function gameWinTest(roundTotal, numberOfRounds) {
 
 
 function playerSelectionTest(playerInput) {
-    if (playerInput === null || playerInput === undefined) {
+    if (playerInput === null || playerInput === "") {
         return console.log("Game canceled");
     } else if (!(playerInput === "rock" || playerInput === "paper" || playerInput === "scissors")) {
         return playerInput = prompt("You didn't enter a valid choice", "Try again");
@@ -76,5 +81,9 @@ function playerSelectionTest(playerInput) {
     }
 }
 
+function cancelGame() {
+    console.log("Game canceled")
+    return null;
+}
 
 console.log(game());
