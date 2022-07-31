@@ -10,8 +10,14 @@ function computerPlay () {
     }
 }
 
-function playRound (playerSelection, computerSelection) {
+function playRound (playerSelection, computerPlay) {
+    let computerSelection = computerPlay();
     let roundWinTest = (playerSelection + computerSelection).toLowerCase();
+    
+    playerChoice.textContent = `You chose: ${(playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1))}.`;
+    results.appendChild(playerChoice);
+    compChoice.textContent = `The computer chose: ${computerSelection}.`;
+    results.appendChild(compChoice);
 
     switch(roundWinTest) {
         case "rockrock":
@@ -32,16 +38,13 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-function game() {
+/* function game(playerInput) {
     const numberOfRounds = 5;
     let total = 0;
+    console.log(playerInput);
 
     for (let i = 0; i < numberOfRounds; i++) {
-        let playerInput = prompt("Choose your weapon!!!", "Rock, paper or scissors???");
-
-        playerSelectionTest(playerInput);
-
-        if (playerInput === null || playerInput === "") {
+            if (playerInput === null || playerInput === "") {
             total = null;
             break;
         } else if (playRound(playerInput, computerPlay()) === "win") {
@@ -56,9 +59,9 @@ function game() {
         }
     }
     return gameWinTest(total, numberOfRounds);
-}
+} */
 
-function gameWinTest(roundTotal, numberOfRounds) {
+/* function gameWinTest(roundTotal, numberOfRounds) {
     if (roundTotal === null) {
         return "Nobody wins when you cancel."
     } else if (roundTotal > 0) {
@@ -68,21 +71,22 @@ function gameWinTest(roundTotal, numberOfRounds) {
     } else {
         return `Over the ${numberOfRounds} rounds played, it was a draw!`;
     }
-}
+} */
 
-
-function playerSelectionTest(playerInput) {
-    if (playerInput === null || playerInput === "") {
-        return console.log("Game canceled");
-    } else if (!(playerInput === "rock" || playerInput === "paper" || playerInput === "scissors")) {
-        return playerInput = prompt("You didn't enter a valid choice", "Try again");
-    } else {
-        return playerInput;
+const btnWrapper = document.getElementById("btn-wrapper");
+btnWrapper.addEventListener("click", (event) => {
+    const isButton = event.target.nodeName === "BUTTON";
+    if (!isButton) {
+        return;
     }
-}
+    playRound(event.target.id, computerPlay);
+    
+});
 
-function cancelGame() {
-    return null;
-}
+const playerWin = document.querySelector("#player-wins");
+const compWin = document.querySelector("#computer-wins");
+const compChoice = document.querySelector("#computer-selection");
+const playerChoice = document.querySelector("#player-selection");
+const results = document.querySelector("#results");
+const round = document.querySelector("#round");
 
-console.log(game());
