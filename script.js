@@ -1,4 +1,16 @@
-function computerPlay () {
+const choiceBtns = document.getElementById("btn-wrapper");
+const winner = document.querySelector("#winner");
+const compChoice = document.querySelector("#computer-selection");
+const playerChoice = document.querySelector("#player-selection");
+const results = document.querySelector("#results");
+const round = document.querySelector("#round");
+
+let roundTally = 1;
+let playerTally = 0;
+let compTally = 0;
+let drawTally = 0;
+
+function computerPlay() {
     let randomNum = Math.floor(Math.random() * 3) + 1;
 
     if (randomNum === 1) {
@@ -10,83 +22,81 @@ function computerPlay () {
     }
 }
 
-function playRound (playerSelection, computerPlay) {
+function playRound(playerSelection) {
     let computerSelection = computerPlay();
-    let roundWinTest = (playerSelection + computerSelection).toLowerCase();
+    let choices = (playerSelection + computerSelection).toLowerCase();
+    let roundResult;
     
     playerChoice.textContent = `You chose: ${(playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1))}.`;
     results.appendChild(playerChoice);
     compChoice.textContent = `The computer chose: ${computerSelection}.`;
     results.appendChild(compChoice);
 
-    switch(roundWinTest) {
+    switch(choices) {
         case "rockrock":
         case "paperpaper":
         case "scissorsscissors":
-            return "draw";
+            roundResult = "draw";
             break;
         case "rockpaper":
         case "paperscissors":
         case "scissorsrock":
-            return "lose"
+            roundResult = "lose"
             break;
         case "rockscissors":
         case "paperrock":
         case "scissorspaper":
-            return "win"
+            roundResult = "win"
             break;
+    }
+    return roundResult;
+}
+
+function gameWinTest(playerTally, compTally) {
+    if (playerTally > compTally) {
+        return "you";
+    } else if (playerTally < compTally) {
+        return "the computer";
+    } else {
+        return "nobody, it was a draw"
     }
 }
 
-/* function game(playerInput) {
-    const numberOfRounds = 5;
-    let total = 0;
-    console.log(playerInput);
-
-    for (let i = 0; i < numberOfRounds; i++) {
-            if (playerInput === null || playerInput === "") {
-            total = null;
-            break;
-        } else if (playRound(playerInput, computerPlay()) === "win") {
-            total += 1;
-            console.log("You win a round.")
-        } else if (playRound(playerInput, computerPlay()) === "lose") {
-            total -= 1;
-            console.log("You lose a round.")
-        } else {
-            total += 0;
-            console.log("You draw a round.")
-        }
+function roundWinTest(playerInput) {
+    let playRoundResult = playRound(playerInput, computerPlay);
+    if (playRoundResult === "win") {
+        playerTally++;
+        return `You won round ${roundTally}`;
+    } else if (playRoundResult === "lose") {
+        compTally++;
+        return `You lost round ${roundTally}.`;
+    } else if (playRoundResult === "draw") {
+        drawTally++;
+        return `Round ${roundTally} was a draw.`;
     }
-    return gameWinTest(total, numberOfRounds);
-} */
+}
 
-/* function gameWinTest(roundTotal, numberOfRounds) {
-    if (roundTotal === null) {
-        return "Nobody wins when you cancel."
-    } else if (roundTotal > 0) {
-        return `You got the most wins over ${numberOfRounds} rounds, you win!!`;
-    } else if (roundTotal < 0) {
-        return `You got the most losses over ${numberOfRounds} rounds, you lose...`;
-    } else {
-        return `Over the ${numberOfRounds} rounds played, it was a draw!`;
-    }
-} */
-
-const btnWrapper = document.getElementById("btn-wrapper");
-btnWrapper.addEventListener("click", (event) => {
+choiceBtns.addEventListener("click", (event) => {
     const isButton = event.target.nodeName === "BUTTON";
     if (!isButton) {
         return;
     }
-    playRound(event.target.id, computerPlay);
     
+    if (roundTally === 5) {
+        round.textContent = roundWinTest(event.target.id);
+        
+        let overallWin = `Game complete, in ${roundTally} rounds, you won ${playerTally}, drew ${drawTally}, and lost ${compTally}. The overall winner is ${gameWinTest(playerTally, compTally)}!`;
+        
+        playerTally = 0;
+        compTally = 0;
+        roundTally = 0;
+
+        choiceBtns.remove();
+
+        return winner.textContent = overallWin;
+    }
+
+    round.innerHTML = "";
+    round.append(roundWinTest(event.target.id)); 
+    roundTally++;   
 });
-
-const playerWin = document.querySelector("#player-wins");
-const compWin = document.querySelector("#computer-wins");
-const compChoice = document.querySelector("#computer-selection");
-const playerChoice = document.querySelector("#player-selection");
-const results = document.querySelector("#results");
-const round = document.querySelector("#round");
-
