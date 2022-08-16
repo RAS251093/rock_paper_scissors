@@ -63,7 +63,7 @@ function gameWinTest(playerTally, compTally) {
 }
 
 function roundWinTest(playerInput) {
-    let playRoundResult = playRound(playerInput, computerPlay);
+    let playRoundResult = playRound(playerInput);
     if (playRoundResult === "win") {
         playerTally++;
         return `You won round ${roundTally}`;
